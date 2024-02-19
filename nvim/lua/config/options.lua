@@ -1,7 +1,3 @@
--- temp fix for typst
-vim.filetype.add({ extension = { typ = "typst" } })
--- temp fix for typst
-
 local opt = vim.opt
 
 -- Options

@@ -105,6 +105,10 @@ return {
 						capabilities = capabilities,
 					})
 				end,
+				["typst-lsp"] = function()
+					vim.filetype.add({ extension = { typ = "typst" } })
+					lspconfig["typst_lsp"].setup({ capabilities = capabilities })
+				end,
 			}
 
 			local mason_registry = require("mason-registry")
