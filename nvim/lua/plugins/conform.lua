@@ -12,6 +12,15 @@ return {
 			end,
 		})
 
+		-- TODO: link conform's formatters setup with mason packages installation
+		local mason_registry = require("mason-registry")
+		local mason_packages_names = { "stylua", "ruff", "prettierd", "rustywind", "biome" }
+		for _, package_name in ipairs(mason_packages_names) do
+			if not mason_registry.is_installed(package_name) then
+				vim.cmd("MasonInstall " .. package_name)
+			end
+		end
+
 		local conform = require("conform")
 		conform.setup({
 			format_on_save = function(buf)
@@ -33,7 +42,6 @@ return {
 				javascriptreact = { "biome", "rustywind" },
 				svelte = { "rustywind" },
 				json = { "biome" },
-				typst = { "typstfmt" },
 			},
 		})
 	end,
