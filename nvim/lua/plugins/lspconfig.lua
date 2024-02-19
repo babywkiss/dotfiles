@@ -3,6 +3,7 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
+			"williamboman/mason.nvim",
 			"pmizio/typescript-tools.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"folke/neodev.nvim",
