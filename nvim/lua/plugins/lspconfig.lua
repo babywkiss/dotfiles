@@ -21,6 +21,9 @@ return {
 
 			-- [mason_server_name] = setup_fn
 			local servers = {
+				["prisma-language-server"] = function()
+					lspconfig["prismals"].setup({ capabilities = capabilities })
+				end,
 				["biome"] = function()
 					lspconfig["biome"].setup({ capabilities = capabilities })
 				end,
