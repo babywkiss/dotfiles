@@ -26,28 +26,26 @@ return {
 			window = {
 				completion = cmp.config.window.bordered({
 					border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
-					-- border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
 					scrollbar = false,
 					winhighlight = "Normal:Normal,FloatBorder:CmpWinBorder,CursorLine:PmenuSel,Search:None",
 				}),
 				documentation = cmp.config.window.bordered({
 					border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
-					-- border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
 					scrollbar = false,
 					winhighlight = "Normal:Normal,FloatBorder:CmpWinBorder,CursorLine:PmenuSel,Search:None",
 				}),
 			},
-			mapping = {
-				["<C-p>"] = cmp.mapping.select_prev_item(),
-				["<C-n>"] = cmp.mapping.select_next_item(),
-				["<C-d>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<C-e>"] = cmp.mapping.close(),
+			mapping = cmp.mapping.preset.insert({
 				["<CR>"] = cmp.mapping.confirm({
 					behavior = cmp.ConfirmBehavior.Insert,
 					select = true,
 				}),
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-e>"] = cmp.mapping.close(),
+				["<C-p>"] = cmp.mapping.select_prev_item(),
+				["<C-n>"] = cmp.mapping.select_next_item(),
+				["<C-d>"] = cmp.mapping.scroll_docs(-5),
+				["<C-f>"] = cmp.mapping.scroll_docs(5),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -75,29 +73,28 @@ return {
 					"i",
 					"s",
 				}),
-			},
-			completion = {
-				completeopt = "menu,menuone",
-			},
+			}),
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
 				end,
 			},
-			sources = {
+			sources = cmp.config.sources({
 				{ name = "nvim_lsp_signature_help" },
-				{ name = "nvim_lsp", keyword_length = 1 },
-				{ name = "nvim_lua", keyword_length = 1 },
-				{ name = "luasnip", keyword_length = 2 },
-				{ name = "path" },
-				{ name = "buffer", keyword_length = 3 },
-			},
+				{ name = "nvim_lsp", group_index = 1 },
+				{ name = "nvim_lua", group_index = 1 },
+				{ name = "luasnip", group_index = 2 },
+				{ name = "path", group_index = 3 },
+				{ name = "buffer", group_index = 4 },
+			}),
 			formatting = {
+				expandable_indicator = false,
+				fields = { "abbr", "kind", "menu" },
 				format = lspkind.cmp_format({
 					mode = "symbol",
 					maxwidth = 50,
 					ellipsis_char = "...",
-					before = function(entry, vim_item)
+					before = function(_, vim_item)
 						return vim_item
 					end,
 				}),

@@ -4,7 +4,6 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason.nvim",
-			"pmizio/typescript-tools.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"folke/neodev.nvim",
 			"b0o/schemastore.nvim",
@@ -105,7 +104,7 @@ return {
 					})
 				end,
 				["typescript-language-server"] = function()
-					require("typescript-tools").setup({
+					lspconfig["tsserver"].setup({
 						capabilities = capabilities,
 					})
 				end,
