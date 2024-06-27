@@ -4,6 +4,7 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason.nvim",
+			"pmizio/typescript-tools.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"folke/neodev.nvim",
 			"b0o/schemastore.nvim",
@@ -104,9 +105,12 @@ return {
 					})
 				end,
 				["typescript-language-server"] = function()
-					lspconfig["tsserver"].setup({
+					require("typescript-tools").setup({
 						capabilities = capabilities,
 					})
+					-- lspconfig["tsserver"].setup({
+					-- 	capabilities = capabilities,
+					-- })
 				end,
 				["typst-lsp"] = function()
 					vim.filetype.add({ extension = { typ = "typst" } })
